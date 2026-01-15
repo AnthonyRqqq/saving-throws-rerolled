@@ -21,6 +21,7 @@ export default function Nav() {
         } else setShowLogin(true);
       },
     },
+    { label: "Conditions", command: () => navigate("/conditions") },
   ];
 
   const start = () => (
