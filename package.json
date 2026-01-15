@@ -1,0 +1,23 @@
+{
+  "name": "saving-throws-rerolled",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyRqqq/saving-throws-rerolled.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyRqqq/saving-throws-rerolled/issues"
+  },
+  "homepage": "https://github.com/AnthonyRqqq/saving-throws-rerolled#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0"
+  }
+}
