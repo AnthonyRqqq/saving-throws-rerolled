@@ -8,11 +8,6 @@
   --active-text-color: #cc9e14;
 }
 
-* {
-  /* background-color: black;
-  border-color: black; */
-}
-
 .nav-div:hover {
   cursor: pointer;
   filter: contrast(0.1);
