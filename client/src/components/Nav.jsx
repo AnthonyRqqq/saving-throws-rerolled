@@ -8,14 +8,17 @@ import SignupForm from "./account/SignupForm";
 export default function Nav() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignupForm, setShowSignupForm] = useState(false);
+  const [reload, setReload] = useState(0);
   const navigate = useNavigate();
-  const currentPage = useLocation().pathname;
 
   const navItems = [
     {
-      label: "Login/Signup",
+      label: Auth.loggedIn() ? "Logout" : "Login/Signup",
       command: () => {
-        setShowLogin(true);
+        if (Auth.loggedIn()) {
+          Auth.logout();
+          setReload((prev) => prev + 1);
+        } else setShowLogin(true);
       },
     },
   ];

@@ -6,7 +6,7 @@ import Nav from "./components/Nav";
 import './App.css'
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: "httpL//localhost:3001/graphql" }),
+  link: new HttpLink({ uri: "http://localhost:3001/graphql" }),
   cache: new InMemoryCache(),
 });
 
