@@ -22,6 +22,7 @@ import { GET_ALL_SPELLS } from "../../utils/queries";
 import { useQuery } from "@apollo/client/react";
 
 import Spinner from "../Spinner";
+import SpellCard from "./SpellCard";
 
 import "./Spells.css";
 
@@ -46,13 +47,23 @@ export default function Spells() {
 
   if (allSpellsLoading) return <Spinner />;
 
+  const getSpellCard = () => {
+    if (!spells.length) return null;
+    const selectedSpell = spells.find((s) => s._id === spellid);
+    return <SpellCard spell={selectedSpell} />;
+  };
+
   return (
     <div className="spell-list-div">
+      {spellid && getSpellCard()}
+
       <ul className="spell-list">
         {spells.map((spell, idx) => (
           <li className="spell-name py-1 px-2 col-lg-3 col-sm-4 col-md-3">
             <span
-              onClick={() => navigate(`/spells?spellid=${spell._id}`)}
+              onClick={() =>
+                navigate(`/spells?spellid=${spell._id}`, { replace: !!spellid })
+              }
               className="nav-div"
             >
               {spell.name}

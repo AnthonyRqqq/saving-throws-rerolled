@@ -15,7 +15,8 @@
 
 .spell-list-div {
     width: 80%;
-    display: flex;
     text-align: center;
-    justify-self: center;
+    /* display: flex; */
+    /* text-align: center; */
+    /* justify-self: center; */
 }
