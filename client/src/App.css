@@ -1,6 +1,6 @@
 .nav-div:hover {
-    cursor: pointer;
-    filter: contrast(0.1);
+  cursor: pointer;
+  filter: contrast(0.1);
 }
 
 .hover-lighten:hover {
@@ -47,6 +47,11 @@
   text-decoration: underline;
 }
 
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -57,12 +62,22 @@
   padding-bottom: 0.5rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .pe-2 {
-  padding-right: 0.5rem
+  padding-right: 0.5rem;
 }
 
 .pb-2 {
-  margin-bottom: 0.75rem
+  margin-bottom: 0.75rem;
 }
 
 .my-1 {
@@ -70,9 +85,14 @@
   margin-top: 0.25rem;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
-  margin-right: 0.25rem
+  margin-right: 0.25rem;
 }
 
 .mb-1 {
@@ -80,11 +100,11 @@
 }
 
 .gap-1 {
-  gap: 0.25rem
+  gap: 0.25rem;
 }
 
 .gap-2 {
-  gap: 0.5rem
+  gap: 0.5rem;
 }
 
 .sm-button {
