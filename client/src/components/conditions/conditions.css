@@ -1,5 +1,5 @@
 .conditions-accordion {
-    width: 40%
+    width: 50%
 }
 
 .conditions-accordion table {
@@ -10,4 +10,16 @@
     padding-left: 4rem;
     padding-right: 1rem;
     text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .conditions-accordion {
+        width: 70%
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .conditions-accordion {
+        width: 100%;
+    }
 }
