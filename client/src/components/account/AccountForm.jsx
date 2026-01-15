@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Auth from "../../lib/auth";
+import Auth from "../../utils/auth";
 import { useMutation } from "@apollo/client/react";
-import { validateEmail } from "../../lib/util";
+import { validateEmail } from "../../utils/lib";
 import { LOGIN_USER, ADD_USER } from "../../utils/mutations";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";

@@ -1,7 +1,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Menubar } from "primereact/Menubar";
 import { useState } from "react";
 import Auth from "../utils/auth";
-import { LoginForm, SignupForm } from "./account";
+import LoginForm from "./account/LoginForm";
+import SignupForm from "./account/SignupForm";
 
 export default function Nav() {
   const [showLogin, setShowLogin] = useState(false);
@@ -9,8 +11,20 @@ export default function Nav() {
   const navigate = useNavigate();
   const currentPage = useLocation().pathname;
 
-  const nvaItems = [{ label: "Saving Throws", path: "/" }];
+  const navItems = [
+    {
+      label: "Login/Signup",
+      command: () => {
+        setShowLogin(true);
+      },
+    },
+  ];
 
+  const start = () => (
+    <div className="nav-div" onClick={() => navigate("/")}>
+      Saving Throws
+    </div>
+  );
   return (
     <>
       <LoginForm
@@ -24,9 +38,11 @@ export default function Nav() {
         onHide={() => setShowSignupForm(false)}
       />
 
-      <ul className="nav-menu">
-        {/* Link to login page, changes to logout button if user logged in */}
-        {!Auth.loggedIn() ? (
+      <Menubar start={start} model={navItems} />
+
+      {/* <ul className="nav-menu"> */}
+      {/* Link to login page, changes to logout button if user logged in */}
+      {/* {!Auth.loggedIn() ? (
           <li className="nav-item">
             <Link
               to={currentPage}
@@ -65,7 +81,7 @@ export default function Nav() {
             </a>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 }
