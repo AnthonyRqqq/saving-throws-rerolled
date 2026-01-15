@@ -1,0 +1,21 @@
+.spell-list li {
+    list-style: none;
+}
+
+.spell-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px;
+}
+
+.spell-name {
+    font-size: larger;
+}
+
+.spell-list-div {
+    width: 80%;
+    display: flex;
+    text-align: center;
+    justify-self: center;
+}

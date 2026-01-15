@@ -22,6 +22,7 @@ export default function Nav() {
       },
     },
     { label: "Conditions", command: () => navigate("/conditions") },
+    { label: "Spells", command: () => navigate("/spells") },
   ];
 
   const start = () => (
