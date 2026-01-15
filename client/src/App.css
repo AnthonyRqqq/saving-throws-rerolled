@@ -1,3 +1,18 @@
+:root {
+  --header-color: #13070c;
+  --footer-color: #13070c;
+  --hover-header-color: #4b4a4a;
+  --background-color: #f1e4d4;
+  --text-color: #e0cf91;
+  --hover-text-color: #96875d;
+  --active-text-color: #cc9e14;
+}
+
+* {
+  /* background-color: black;
+  border-color: black; */
+}
+
 .nav-div:hover {
   cursor: pointer;
   filter: contrast(0.1);
