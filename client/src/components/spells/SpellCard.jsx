@@ -83,7 +83,7 @@ export default function SpellCard({ spell }) {
     return descriptionArray.map((item) => {
       if (item === "") return <SpellTable />;
 
-      return <div className="py-2">{item}</div>;
+      return <div className="py-2 text-start">{item}</div>;
     });
   };
 
@@ -108,9 +108,8 @@ export default function SpellCard({ spell }) {
       <div className="spellCardHeader px-3">
         <h2 className="spellCardName">{spell.name}</h2>
         <div className="d-flex" style={{ alignItems: "center" }}>
-          <h4 className="px-3"> {spell.isRitual ? "Ritual" : ""}</h4>
+          <h3 className="px-3"> {spell.isRitual ? "Ritual" : ""}</h3>
 
-          {/* <Button icon="pi pi-times" onClick={() => navigate(-1)} rounded style={{ maxWidth: '50%', maxHeight: '70%'}} /> */}
           <Button
             icon="pi pi-times"
             onClick={() => navigate(-1)}
@@ -136,7 +135,7 @@ export default function SpellCard({ spell }) {
   };
 
   return (
-    <Card header={header}>
+    <Card className="spell-card" header={header}>
       <div>
         <CardField
           title={
@@ -178,9 +177,10 @@ export default function SpellCard({ spell }) {
           <CardField title="At Higher Level: " content={spell.atHigherLevel} />
         )}
 
-        <CardField title="Spell Lists: " content={classList} />
-        <CardField title="Source: " content={spell.sourceBook} />
-
+        <div className="pt-4 mt-4">
+          <CardField title="Spell Lists: " content={classList} />
+          <CardField title="Source: " content={spell.sourceBook} />
+        </div>
         {statBlock && <StatBlock statBlock={statBlock} />}
       </div>
     </Card>
