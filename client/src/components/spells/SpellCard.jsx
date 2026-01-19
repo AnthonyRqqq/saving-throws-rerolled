@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import StatBlock from "./StatBlock";
 
 import "./SpellCard.css";
 
@@ -179,6 +180,8 @@ export default function SpellCard({ spell }) {
 
         <CardField title="Spell Lists: " content={classList} />
         <CardField title="Source: " content={spell.sourceBook} />
+
+        {statBlock && <StatBlock statBlock={statBlock} />}
       </div>
     </Card>
   );
