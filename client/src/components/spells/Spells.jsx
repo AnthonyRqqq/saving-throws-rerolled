@@ -24,7 +24,6 @@ import { useQuery } from "@apollo/client/react";
 import Spinner from "../Spinner";
 import SpellCard from "./SpellCard";
 import SpellFilters from "./SpellFilters";
-import FilterChoice from "./FilterChoice";
 import SpellToolbar from "./SpellToolbar";
 
 import "./Spells.css";

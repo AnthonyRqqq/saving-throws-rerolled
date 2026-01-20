@@ -1,0 +1,9 @@
+.filterButton .p-button {
+  border-radius: 8px;
+  width: 100%;
+}
+
+.border-red .p-button {
+    border-color: red;
+    background-color: rgb(129, 18, 18);
+}
