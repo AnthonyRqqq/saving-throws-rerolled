@@ -1,9 +1,6 @@
 import { useState } from "react";
-
 import { Sidebar } from "primereact/sidebar";
 import { SelectButton } from "primereact/selectbutton";
-import { Button } from "primereact/button";
-
 import "./FilterChoice.css";
 
 export default function FilterChoice({
