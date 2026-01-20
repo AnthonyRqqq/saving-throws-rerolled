@@ -1,9 +1,14 @@
+.filterChoice {
+  border-color: transparent;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.87);
+}
+
 .filterButton .p-button {
   border-radius: 8px;
   width: 100%;
 }
 
 .border-red .p-button {
-    border-color: red;
-    background-color: rgb(129, 18, 18);
+  border-color: red;
+  background-color: rgb(129, 18, 18);
 }

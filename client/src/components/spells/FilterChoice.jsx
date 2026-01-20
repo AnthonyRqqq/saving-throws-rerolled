@@ -43,7 +43,7 @@ export default function FilterChoice({
           options={["Reset Options"]}
           onClick={() => setDisplayedFilters([])}
           tooltip="Clear all currently selected filter options."
-          tooltipOptions={{ position: 'left'}}
+          tooltipOptions={{ position: "left" }}
         />
       </>
     );
@@ -52,7 +52,7 @@ export default function FilterChoice({
   const Header = () => {
     return (
       <div className="d-flex align-items-center">
-        <h3 className="underline px-2">Filter Options</h3>
+        <h2 className="underline px-2 fw-normal">Filter Options</h2>
       </div>
     );
   };
@@ -63,6 +63,7 @@ export default function FilterChoice({
       visible={showFilterChoice}
       onHide={() => setShowFilterChoice(false)}
       header={<Header />}
+      className="filterChoice"
     >
       <FilterOptions />
     </Sidebar>

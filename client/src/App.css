@@ -30,6 +30,10 @@
   font-weight: bold;
 }
 
+.fw-normal {
+  font-weight: normal;
+}
+
 .fst-italic {
   font-style: italic;
 }
