@@ -23,11 +23,13 @@ import { useQuery } from "@apollo/client/react";
 
 import Spinner from "../Spinner";
 import SpellCard from "./SpellCard";
+import SpellFilters from "./SpellFilters";
 
 import "./Spells.css";
 
 export default function Spells() {
   const [spells, setSpells] = useState([]);
+  const [allSpells, setAllSpells] = useState([]);
 
   const [searchParams] = useSearchParams();
   const spellid = searchParams.get("spellid");
@@ -42,6 +44,7 @@ export default function Spells() {
     if (allSpellsLoading || !allSpellsData) return;
     let spells = allSpellsData.spells;
     const sortedSpells = sortByName([...spells]);
+    setAllSpells(sortedSpells);
     setSpells(sortedSpells);
   }, [allSpellsData, allSpellsLoading]);
 
@@ -55,6 +58,8 @@ export default function Spells() {
 
   return (
     <div className="spell-list-div">
+      <SpellFilters allSpells={allSpells} spells={spells} setSpells={setSpells} />
+
       {spellid && getSpellCard()}
 
       <ul className="spell-list">
