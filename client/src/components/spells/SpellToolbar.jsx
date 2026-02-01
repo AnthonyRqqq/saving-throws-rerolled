@@ -25,6 +25,8 @@ export default function SpellToolbar({
             rounded
             outlined
             onClick={() => setShowFilterChoice(true)}
+            tooltip="Show Filter Options"
+            tooltipOptions={{ position: "left" }}
           />
         </div>
         <div className="px-1">
@@ -36,6 +38,8 @@ export default function SpellToolbar({
               e.target.blur();
               setFilters({});
             }}
+            tooltip="Clear Filters"
+            tooltipOptions={{ position: "left" }}
           />
         </div>
       </div>
