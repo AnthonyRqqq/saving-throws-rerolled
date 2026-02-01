@@ -33,6 +33,7 @@ export default function Spells() {
   const [allSpells, setAllSpells] = useState([]);
   const [filters, setFilters] = useState({});
   const [displayedFilters, setDisplayedFilters] = useState([]);
+  const [reload, setReload] = useState(0);
 
   const [searchParams] = useSearchParams();
   const spellid = searchParams.get("spellid");
@@ -70,6 +71,7 @@ export default function Spells() {
     <div className="spell-list-div">
       <SpellToolbar {...filterVars} />
       <SpellFilters
+        key={allSpells}
         allSpells={allSpells}
         spells={spells}
         setSpells={setSpells}

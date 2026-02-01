@@ -15,7 +15,7 @@ export default function FilterChoice({
   const FilterOptions = () => {
     return (
       <>
-        {choices.map((choice, idx) => {
+        {choices.sort().map((choice, idx) => {
           return (
             <SelectButton
               className="py-2 filterButton"
@@ -23,12 +23,12 @@ export default function FilterChoice({
               options={[choice]}
               value={displayedFilters.includes(choice) && choice}
               onClick={(e) => {
-                let newFilters = displayedFilters;
+                let newFilters = [...displayedFilters];
                 if (newFilters.includes(choice))
                   newFilters = newFilters.filter((ch) => ch !== choice);
                 else newFilters.push(choice);
 
-                setDisplayedFilters(newFilters);
+                setDisplayedFilters(newFilters.sort());
                 setReload((prev) => prev + 1);
               }}
             />
