@@ -14,7 +14,7 @@ export default function SpellFilters({
   displayedFilters,
 }) {
   useEffect(() => {
-    let newSpells = allSpells;
+    let newSpells = [...allSpells];
     Object.entries(filters).forEach(([key, val]) => {
       if (val) {
         switch (key) {
@@ -22,11 +22,28 @@ export default function SpellFilters({
             newSpells = newSpells.filter((spell) =>
               spell.name.toLowerCase().includes(val.toLowerCase()),
             );
+            break;
           case "school":
+            newSpells = newSpells.filter((spell) => val.includes(spell.school));
+            break;
           case "class":
+            newSpells = newSpells.filter((spell) =>
+              spell.classList.some((opt) => val.includes(opt)),
+            );
+            break;
           case "level":
+            newSpells = newSpells.filter((spell) => val.includes(spell.level));
+            break;
           case "ritual":
+            const ritual = val[0] === "Ritual Only";
+            newSpells = newSpells.filter((spell) => spell.isRitual === ritual);
+            break;
           case "concentration":
+            const concentration = val[0] === "Concentration Only";
+            newSpells = newSpells.filter(
+              (spell) => spell.isConcentration === concentration,
+            );
+            break;
         }
       }
     });
@@ -78,7 +95,6 @@ export default function SpellFilters({
       {displayedFilters.map((filter, index) => {
         const filterObj = filterMap[filter];
         return (
-          // filter.multi
           <>
             <div className="pt-2">{filter}</div>
 
