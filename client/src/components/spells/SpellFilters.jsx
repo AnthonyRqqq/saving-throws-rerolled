@@ -65,6 +65,8 @@ export default function SpellFilters({
       else newFilters[name] = [val];
     }
 
+    if (!newFilters[name].length) delete newFilters[name];
+
     setFilters(newFilters);
   };
 
