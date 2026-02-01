@@ -8,6 +8,8 @@ export default function FilterChoice({
   setDisplayedFilters,
   showFilterChoice,
   setShowFilterChoice,
+  setFilters,
+  filters,
 }) {
   const [reload, setReload] = useState(0);
   const choices = ["School", "Level", "Class", "Concentration", "Ritual"];
@@ -38,7 +40,16 @@ export default function FilterChoice({
         <SelectButton
           className="filterButton border-red py-2"
           options={["Reset Options"]}
-          onClick={() => setDisplayedFilters([])}
+          onClick={() => {
+            setDisplayedFilters([]);
+
+            const newFilters = { ...filters };
+            Object.keys(newFilters).forEach((key) => {
+              if (key !== "name") delete newFilters[key];
+            });
+
+            setFilters(newFilters);
+          }}
           tooltip="Clear all currently selected filter options."
           tooltipOptions={{ position: "left" }}
         />

@@ -7,6 +7,7 @@ export default function SpellToolbar({
   setFilters,
   displayedFilters,
   setDisplayedFilters,
+  filters,
 }) {
   const [showFilterChoice, setShowFilterChoice] = useState(false);
 
@@ -17,6 +18,8 @@ export default function SpellToolbar({
         setDisplayedFilters={setDisplayedFilters}
         showFilterChoice={showFilterChoice}
         setShowFilterChoice={setShowFilterChoice}
+        filters={filters}
+        setFilters={setFilters}
       />
       <div className="d-flex flex-end">
         <div className="px-1">
