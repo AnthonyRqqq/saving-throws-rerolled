@@ -87,6 +87,7 @@ export default function SpellFilters({
   return (
     <div key={displayedFilters}>
       <div className="py-1">
+        <div className="py-1">Name</div>
         <InputText
           onChange={(e) => {
             setFilters((prev) => ({ ...prev, ["name"]: e.target.value }));
