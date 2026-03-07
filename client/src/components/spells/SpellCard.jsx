@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useRef, useEffect } from "react";
 
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
@@ -10,6 +11,13 @@ export default function SpellCard({ spell }) {
   if (!spell) return;
 
   const navigate = useNavigate();
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+
+    cardRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [cardRef.current, spell]);
 
   // Sets the string to be displayed for the spell level
   let spellLevelText;
@@ -137,7 +145,7 @@ export default function SpellCard({ spell }) {
   };
 
   return (
-    <Card className="spell-card" header={header}>
+    <Card className="spell-card" header={header} ref={cardRef}>
       <div>
         <CardField
           title={
