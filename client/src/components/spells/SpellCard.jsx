@@ -13,6 +13,7 @@ export default function SpellCard({ spell }) {
   const navigate = useNavigate();
   const cardRef = useRef(null);
 
+  // When a spell is selected, scroll up to view the card
   useEffect(() => {
     if (!cardRef.current) return;
 
