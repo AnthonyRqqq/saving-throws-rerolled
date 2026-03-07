@@ -82,12 +82,16 @@ export default function AccountForm({
     }
   };
 
-  const handleOnHide = async () => {
+  const dialogReset = async (hide) => {
     setErrorMessage("");
     setPassword("");
     setVerifyPassword("");
     setEmail("");
-    onHide();
+    await onHide();
+  };
+
+  const handleOnHide = async () => {
+    await dialogReset();
   };
 
   const formField = ({ input, inputName, placeHolder, type }) => {
@@ -110,10 +114,11 @@ export default function AccountForm({
     <Dialog
       visible={show}
       onHide={handleOnHide}
+      // onHide={onHide}
       header={signup ? "Create Account" : "Login"}
     >
       {verifyLogin && (
-        <div className="text-center">
+        <div className="text-center pb-2">
           You must be logged in to cast this spell.
         </div>
       )}

@@ -16,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/conditions", element: <Conditions /> },
       { path: "/spells/:listid?", element: <Spells /> },
+      { path: "/spellLists/:userId", element: <Spells /> },
     ],
   },
 ]);
@@ -23,5 +24,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

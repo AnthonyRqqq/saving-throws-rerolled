@@ -4,10 +4,13 @@ import { useState } from "react";
 import Auth from "../utils/auth";
 import LoginForm from "./account/LoginForm";
 import SignupForm from "./account/SignupForm";
+import AccountRequired from "./account/AccountRequired";
 
 export default function Nav() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignupForm, setShowSignupForm] = useState(false);
+  const [accountRequired, setAccountRequired] = useState(false);
+  const [accountFn, setAccountFn] = useState(null);
   const [reload, setReload] = useState(0);
   const navigate = useNavigate();
 
@@ -22,7 +25,26 @@ export default function Nav() {
       },
     },
     { label: "Conditions", command: () => navigate("/conditions") },
-    { label: "Spells", command: () => navigate("/spells") },
+    {
+      label: "Spells",
+      items: [
+        {
+          label: "All Spells",
+          command: () => navigate("/spells"),
+        },
+        {
+          label: "Spell Lists",
+          command: async () => {
+            if (!Auth.loggedIn()) {
+              setAccountFn(
+                () => () => navigate(`/spellLists/${Auth.getUser()}`),
+              );
+              return setAccountRequired(true);
+            }
+          },
+        },
+      ],
+    },
   ];
 
   const start = () => (
@@ -32,6 +54,8 @@ export default function Nav() {
   );
   return (
     <>
+      <AccountRequired show={accountRequired} setShow={setAccountRequired} loginFn={accountFn} />
+
       <LoginForm
         show={showLogin}
         setShowSignupForm={setShowSignupForm}
