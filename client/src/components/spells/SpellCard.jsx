@@ -7,6 +7,8 @@ import StatBlock from "./StatBlock";
 import "./SpellCard.css";
 
 export default function SpellCard({ spell }) {
+  if (!spell) return;
+
   const navigate = useNavigate();
 
   // Sets the string to be displayed for the spell level
