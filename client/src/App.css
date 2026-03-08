@@ -10,7 +10,9 @@
 
 * {
   box-sizing: border-box;
-  font-family: American Typewriter, serif;
+  font-family:
+    American Typewriter,
+    serif;
 }
 
 .nav-div:hover {
@@ -20,6 +22,11 @@
 
 .hover-lighten:hover {
   filter: contrast(0.1);
+}
+
+.hover-click:hover {
+  filter: contrast(0.1);
+  cursor: pointer;
 }
 
 .focus-lighten:focus {
@@ -55,7 +62,7 @@
 }
 
 .text-start {
-  text-align: start !important
+  text-align: start !important;
 }
 
 .align-self-center {

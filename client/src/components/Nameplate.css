@@ -1,0 +1,15 @@
+.nameplate .p-card-content {
+  padding: 0px;
+}
+
+.nameplate {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1rem;
+}
+
+.nameplate-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
