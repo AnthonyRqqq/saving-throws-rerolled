@@ -37,10 +37,12 @@ export default function Nav() {
           command: async () => {
             if (!Auth.loggedIn()) {
               setAccountFn(
-                () => () => navigate(`/spellLists/${Auth.getUser()}`),
+                () => () => navigate(`/spellLists/${Auth.getUser().data._id}`),
               );
               return setAccountRequired(true);
             }
+
+            navigate(`/spellLists/${Auth.getUser().data._id}`);
           },
         },
       ],
@@ -54,7 +56,11 @@ export default function Nav() {
   );
   return (
     <>
-      <AccountRequired show={accountRequired} setShow={setAccountRequired} loginFn={accountFn} />
+      <AccountRequired
+        show={accountRequired}
+        setShow={setAccountRequired}
+        loginFn={accountFn}
+      />
 
       <LoginForm
         show={showLogin}

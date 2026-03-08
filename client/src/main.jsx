@@ -4,6 +4,7 @@ import { StrictMode } from "react";
 import App from "./App.jsx";
 import Conditions from "./components/conditions/Conditions.jsx";
 import Spells from "./components/spells/Spells.jsx";
+import SpellLists from "./components/spells/SpellLists.jsx";
 
 import "primereact/resources/themes/soho-dark/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/conditions", element: <Conditions /> },
       { path: "/spells/:listid?", element: <Spells /> },
-      { path: "/spellLists/:userId", element: <Spells /> },
+      { path: "/spellLists/:userId", element: <SpellLists /> },
     ],
   },
 ]);
