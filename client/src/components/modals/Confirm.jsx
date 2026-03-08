@@ -3,7 +3,7 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 export default function Confirm({
   onYes,
   onNo,
-  confirmText,
+  confirmText = 'Are you sure you want to cast this spell? What is done cannot be undone.',
   yesButton,
   noButton,
   show,
