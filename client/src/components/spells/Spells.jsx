@@ -18,7 +18,7 @@ import { sortByName } from "../../utils/lib";
 
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GET_ALL_SPELLS } from "../../utils/queries";
+import { GET_ALL_SPELLS, GET_SPELL_LIST_BY_ID } from "../../utils/queries";
 import { useQuery } from "@apollo/client/react";
 
 import Spinner from "../Spinner";
@@ -30,6 +30,7 @@ import "./Spells.css";
 
 export default function Spells() {
   const [spells, setSpells] = useState([]);
+  const [listSpells, setListSpells] = useState([])
   const [allSpells, setAllSpells] = useState([]);
   const [filters, setFilters] = useState({});
   const [displayedFilters, setDisplayedFilters] = useState([]);
@@ -44,13 +45,32 @@ export default function Spells() {
   const { loading: allSpellsLoading, data: allSpellsData } =
     useQuery(GET_ALL_SPELLS);
 
+  const { loading: spellListLoading, data: spellListData } = useQuery(
+    GET_SPELL_LIST_BY_ID,
+    { variables: { id: listid } },
+  );
+
   useEffect(() => {
     if (allSpellsLoading || !allSpellsData) return;
     let spells = allSpellsData.spells;
     const sortedSpells = sortByName([...spells]);
     setAllSpells(sortedSpells);
-    setSpells(sortedSpells);
-  }, [allSpellsData, allSpellsLoading]);
+
+    // if (listid && !spellListData) return;
+    if (listid) {
+      if (!spellListData) return;
+      else {
+        // const listSpells = sortedSpells.filter((spell) => )
+        console.log(spellListData);
+        const listSpells = spellListData.spellListById.spell;
+        const filteredSpells = sortedSpells.filter((spell) =>
+          listSpells.some((listSpell) => listSpell._id === spell._id),
+        );
+        setListSpells(filteredSpells)
+        setSpells(filteredSpells)
+      }
+    } else setSpells(sortedSpells);
+  }, [allSpellsData, allSpellsLoading, spellListLoading, spellListData]);
 
   if (allSpellsLoading) return <Spinner />;
 
@@ -74,6 +94,7 @@ export default function Spells() {
         key={allSpells}
         allSpells={allSpells}
         spells={spells}
+        listSpells={listSpells}
         setSpells={setSpells}
         {...filterVars}
       />

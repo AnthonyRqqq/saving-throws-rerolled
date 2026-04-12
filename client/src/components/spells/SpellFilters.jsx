@@ -8,13 +8,15 @@ import { spellClass, spellLevel, spellSchool } from "./filters";
 export default function SpellFilters({
   allSpells,
   spells,
+  listSpells,
   setSpells,
   filters,
   setFilters,
   displayedFilters,
 }) {
   useEffect(() => {
-    let newSpells = [...allSpells];
+    let newSpells = listSpells ? [...listSpells] : [...allSpells];
+
     Object.entries(filters).forEach(([key, val]) => {
       if (val) {
         switch (key) {
@@ -49,7 +51,9 @@ export default function SpellFilters({
     });
 
     if (Object.keys(filters).length) return setSpells(newSpells);
-    setSpells(allSpells);
+
+    if (listSpells) setSpells(listSpells);
+    else setSpells(allSpells);
   }, [filters]);
 
   const handleChange = ({ name, val, multi = true }) => {
