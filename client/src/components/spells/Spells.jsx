@@ -25,12 +25,13 @@ import Spinner from "../Spinner";
 import SpellCard from "./SpellCard";
 import SpellFilters from "./SpellFilters";
 import SpellToolbar from "./SpellToolbar";
+import SpellbookSidebar from "./SpellbookSidebar";
 
 import "./Spells.css";
 
 export default function Spells() {
   const [spells, setSpells] = useState([]);
-  const [listSpells, setListSpells] = useState([])
+  const [listSpells, setListSpells] = useState([]);
   const [allSpells, setAllSpells] = useState([]);
   const [filters, setFilters] = useState({});
   const [displayedFilters, setDisplayedFilters] = useState([]);
@@ -66,8 +67,8 @@ export default function Spells() {
         const filteredSpells = sortedSpells.filter((spell) =>
           listSpells.some((listSpell) => listSpell._id === spell._id),
         );
-        setListSpells(filteredSpells)
-        setSpells(filteredSpells)
+        setListSpells(filteredSpells);
+        setSpells(filteredSpells);
       }
     } else setSpells(sortedSpells);
   }, [allSpellsData, allSpellsLoading, spellListLoading, spellListData]);
@@ -88,32 +89,39 @@ export default function Spells() {
   };
 
   return (
-    <div className="spell-list-div">
-      <SpellToolbar {...filterVars} />
-      <SpellFilters
-        key={allSpells}
-        allSpells={allSpells}
-        spells={spells}
-        listSpells={listSpells}
-        setSpells={setSpells}
-        {...filterVars}
-      />
-      {spellid && getSpellCard()}
+    <div className="d-flex">
+      <div className="spell-list-div">
+        <SpellToolbar {...filterVars} />
+        <SpellFilters
+          key={allSpells}
+          allSpells={allSpells}
+          spells={spells}
+          listSpells={listSpells}
+          setSpells={setSpells}
+          {...filterVars}
+        />
+        {spellid && getSpellCard()}
 
-      <ul className="spell-list">
-        {spells.map((spell, idx) => (
-          <li className="spell-name py-1 px-2 col-lg-3 col-sm-4 col-md-3">
-            <span
-              onClick={() =>
-                navigate(`/spells?spellid=${spell._id}`, { replace: !!spellid })
-              }
-              className="nav-div"
-            >
-              {spell.name}
-            </span>
-          </li>
-        ))}
-      </ul>
+        <ul className="spell-list">
+          {spells.map((spell, idx) => (
+            <li className="spell-name py-1 px-2 col-lg-3 col-sm-4 col-md-3">
+              <span
+                onClick={() =>
+                  navigate(`/spells?spellid=${spell._id}`, {
+                    replace: !!spellid,
+                  })
+                }
+                className="nav-div"
+              >
+                {spell.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="d-flex px-3">
+        <SpellbookSidebar listSpells={listSpells} defaultList={listid} />
+      </div>
     </div>
   );
 }
