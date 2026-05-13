@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 import Auth from "../../utils/auth";
 
+import InputForm from "../modals/InputForm";
+
 import { useEffect, useState } from "react";
 
 export default function SpellbookSidebar({
@@ -26,6 +28,8 @@ export default function SpellbookSidebar({
   const [options, setOptions] = useState([]);
   const [selectedOpt, setSelectedOpt] = useState();
   const [listData, setListData] = useState({});
+  const [showNameEdit, setShowNameEdit] = useState(false);
+  const [nameVal, setNameVal] = useState("");
   const user = Auth.getUser();
   const navigate = useNavigate();
 
@@ -50,11 +54,11 @@ export default function SpellbookSidebar({
 
   if (!user) return <></>;
 
-  const handleUpdateSpellList = async () => {
+  const handleUpdateSpellList = async ({ variables }) => {
     await updateSpellList({
       variables: {
         listId: listData._id,
-        spells: checkedSpells,
+        ...variables,
       },
     });
 
@@ -64,12 +68,27 @@ export default function SpellbookSidebar({
   const Header = () => {
     return (
       <div>
+        <InputForm
+          header="Change List Name"
+          show={showNameEdit}
+          onHide={() => setShowNameEdit(false)}
+          onNo={() => setShowNameEdit(false)}
+          onYes={async () => {
+            await handleUpdateSpellList({ variables: { name: nameVal } });
+          }}
+          setVal={setNameVal}
+          val={nameVal}
+          defaultVal={selectedOpt}
+        />
+
         <div>
           {showCheckboxes && (
             <Button
               label="Save Changes"
               onClick={async () => {
-                await handleUpdateSpellList();
+                await handleUpdateSpellList({
+                  variables: { spells: checkedSpells },
+                });
               }}
             />
           )}
@@ -109,7 +128,10 @@ export default function SpellbookSidebar({
               navigate(`/spells/${listData._id}`);
             }}
           />
-          <Button icon="pi pi-pencil" />
+          <Button
+            icon="pi pi-pencil"
+            onClick={() => setShowNameEdit((prev) => !prev)}
+          />
         </div>
       </div>
     );
