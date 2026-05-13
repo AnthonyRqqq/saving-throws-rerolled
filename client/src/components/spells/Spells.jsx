@@ -1,25 +1,12 @@
-// import { useEffect, useState, useRef } from "react";
-// import { useMutation, useQuery } from "@apollo/client";
-// import {
-//   GET_ALL_SPELLS,
-//   GET_ALL_SPELL_LISTS,
-// } from "../../utils/queries";
-// import { CREATE_SPELL_LIST } from "../../utils/mutations";
-// // import { Spinner, Button } from "react-bootstrap";
-// import SpellCard from "./SpellCard";
-// import FilterSelect from "./FilterSelect";
-// import Filters from "./Filters";
-// import SpellListSidebar from "./SpellListSidebar";
-// import InputModal from "../Modals/InputModal";
-// import AccountModal from "../Modals/AccountModal";
 import Auth from "../../utils/auth";
-// import "./Spells.css";
 import { sortByName } from "../../utils/lib";
 
 import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GET_ALL_SPELLS, GET_SPELL_LIST_BY_ID } from "../../utils/queries";
 import { useQuery } from "@apollo/client/react";
+
+import { Checkbox } from "primereact/checkbox";
 
 import Spinner from "../Spinner";
 import SpellCard from "./SpellCard";
@@ -36,10 +23,11 @@ export default function Spells() {
   const [filters, setFilters] = useState({});
   const [displayedFilters, setDisplayedFilters] = useState([]);
   const [reload, setReload] = useState(0);
+  const [showCheckboxes, setShowCheckboxes] = useState(false);
+  const [checkedSpells, setCheckedSpells] = useState([]);
 
   const [searchParams] = useSearchParams();
   const spellid = searchParams.get("spellid");
-  const userid = searchParams.get("userid");
   const { listid } = useParams();
   const navigate = useNavigate();
 
@@ -57,11 +45,9 @@ export default function Spells() {
     const sortedSpells = sortByName([...spells]);
     setAllSpells(sortedSpells);
 
-    // if (listid && !spellListData) return;
     if (listid) {
       if (!spellListData) return;
       else {
-        // const listSpells = sortedSpells.filter((spell) => )
         console.log(spellListData);
         const listSpells = spellListData.spellListById.spell;
         const filteredSpells = sortedSpells.filter((spell) =>
@@ -105,6 +91,24 @@ export default function Spells() {
         <ul className="spell-list">
           {spells.map((spell, idx) => (
             <li className="spell-name py-1 px-2 col-lg-3 col-sm-4 col-md-3">
+              {showCheckboxes && (
+                <Checkbox
+                  className="mx-1"
+                  checked={checkedSpells.includes(spell._id)}
+                  onChange={() => {
+                    let newCheckedSpells = [...checkedSpells];
+                    if (checkedSpells.includes(spell._id)) {
+                      newCheckedSpells = newCheckedSpells.filter(
+                        (id) => id !== spell._id,
+                      );
+                      setCheckedSpells(newCheckedSpells);
+                    } else {
+                      newCheckedSpells.push(spell._id);
+                      setCheckedSpells(newCheckedSpells);
+                    }
+                  }}
+                />
+              )}
               <span
                 onClick={() =>
                   navigate(`/spells?spellid=${spell._id}`, {
@@ -119,9 +123,21 @@ export default function Spells() {
           ))}
         </ul>
       </div>
-      <div className="d-flex px-3">
-        <SpellbookSidebar listSpells={listSpells} defaultList={listid} />
-      </div>
+      {listid && (
+        <div className="d-flex px-3">
+          <SpellbookSidebar
+            listSpells={listSpells}
+            setListSpells={setListSpells}
+            defaultList={listid}
+            showCheckboxes={showCheckboxes}
+            setShowCheckboxes={setShowCheckboxes}
+            checkedSpells={checkedSpells}
+            setCheckedSpells={setCheckedSpells}
+            allSpells={allSpells}
+            setSpells={setSpells}
+          />
+        </div>
+      )}
     </div>
   );
 }

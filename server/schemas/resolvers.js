@@ -81,7 +81,7 @@ const resolvers = {
     fantasyLocationByName: async (parent, { name }) => {
       try {
         return await FantasyLocation.findOne({ name: name }).populate(
-          "realLocation"
+          "realLocation",
         );
       } catch (err) {
         console.error("Error finding fantasy location by name: ", err);
@@ -164,7 +164,7 @@ const resolvers = {
 
     updateUser: async (
       parent,
-      { id, email, password, weatherCreateInstruction }
+      { id, email, password, weatherCreateInstruction },
     ) => {
       try {
         const updates = {};
@@ -192,7 +192,7 @@ const resolvers = {
           {
             new: true,
             runValidators: true,
-          }
+          },
         );
 
         return updatedUser;
@@ -227,7 +227,7 @@ const resolvers = {
           },
           {
             new: true,
-          }
+          },
         ).populate({
           path: "fantasyLocations",
           populate: {
@@ -254,7 +254,7 @@ const resolvers = {
           },
           {
             new: true,
-          }
+          },
         ).populate({
           path: "fantasyLocations",
           populate: {
@@ -278,7 +278,7 @@ const resolvers = {
           },
           {
             new: true,
-          }
+          },
         ).populate({
           path: "fantasyLocations",
           populate: {
@@ -290,7 +290,7 @@ const resolvers = {
 
         return updatedUser;
       } catch (err) {
-        console.error("Could not remove fantasy location: "), err;
+        (console.error("Could not remove fantasy location: "), err);
         throw new Error("Could not remove fantasy location");
       }
     },
@@ -325,21 +325,31 @@ const resolvers = {
 
     updateSpellList: async (
       parent,
-      { listId, name, spells, preparedSpells, spellSlots, listClass }
+      { listId, name, spells, preparedSpells, spellSlots, listClass },
     ) => {
       try {
+        const varMap = {
+          name,
+          spell: spells,
+          preparedSpells,
+          spellSlots,
+          class: listClass,
+        };
+
+        const setData = {};
+
+        Object.entries(varMap).forEach(([key, val]) => {
+          if (val === undefined) return;
+
+          setData[key] = val;
+        });
+
+        if (!Object.keys(setData).length) return;
+
         return await SpellList.findOneAndUpdate(
           { _id: listId },
-          {
-            $set: {
-              name,
-              spell: spells,
-              preparedSpells,
-              class: listClass,
-              spellSlots,
-            },
-          },
-          { new: true }
+          { $set: setData },
+          { new: true },
         )
           .populate({ path: "user" })
           .populate({ path: "spell", populate: { path: "statBlock" } });
